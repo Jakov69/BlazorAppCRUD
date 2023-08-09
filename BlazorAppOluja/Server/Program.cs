@@ -2,6 +2,7 @@ global using BlazorAppOluja.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using BlazorAppOluja.Server.Data;
 global using BlazorAppOluja.Server.Services.ProductService;
+global using BlazorAppOluja.Server.Services.CategoryService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 
@@ -20,6 +21,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
