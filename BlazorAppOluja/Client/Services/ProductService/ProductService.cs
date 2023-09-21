@@ -12,10 +12,12 @@ namespace BlazorAppOluja.Client.Services.ProductService
 
         public List<Product> Products { get; set; } = new List<Product>();
 
+        public event Action ProductChanged;
+
         public async Task<ServiceResponse<Product>> GetProduct(int productId)
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
-                return result;
+            return result;
         }
 
         public async Task GetProducts()
@@ -29,17 +31,28 @@ namespace BlazorAppOluja.Client.Services.ProductService
                 Products = result.Data;
 
 
-                Console.WriteLine($"Dohvaćeno {Products.Count} proizvoda iz baze.");
+               Console.WriteLine($"Dohvaćeno {Products.Count} proizvoda iz baze.");
                 foreach(var product in Products)
                 {
                     Console.WriteLine($"Title: {product.Title}");
                 }
-            }
+           }
             else
             {
                 Console.WriteLine("Nema dohvaćenih podataka ili dogodila se greška.");
             }
         }
-    
-}
+
+
+        public async Task GetProducts(string? categoryUrl = null)
+        {
+            var result = categoryUrl == null ?
+                await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product") :
+                await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/category/{categoryUrl}");
+            if (result != null && result.Data != null)
+                Products = result.Data;
+
+            ProductChanged.Invoke();
+        }
+    }
 }
