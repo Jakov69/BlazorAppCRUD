@@ -1,10 +1,12 @@
 global using BlazorAppOluja.Shared;
 global using System.Net.Http.Json;
 global using BlazorAppOluja.Client.Services.ProductService;
+global using BlazorAppOluja.Client.Services.CategoryService;
 using BlazorAppOluja.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorAppOluja.Client.Services.CategoryService;
+
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

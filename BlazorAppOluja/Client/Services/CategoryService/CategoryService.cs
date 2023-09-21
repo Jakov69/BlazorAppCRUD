@@ -5,6 +5,7 @@ namespace BlazorAppOluja.Client.Services.CategoryService
     public class CategoryService : ICategoryService
     {
         private readonly HttpClient _http;
+
         public CategoryService(HttpClient http)
         {
             _http = http;
@@ -17,7 +18,7 @@ namespace BlazorAppOluja.Client.Services.CategoryService
         {
             var response = await _http.GetFromJsonAsync<ServiceResponse<List<Category>>>("api/Category");
             if(response != null && response.Data != null)
-                Categories = response.Data;
+            Categories = response.Data;
             
         }
     }

@@ -5,6 +5,7 @@ namespace BlazorAppOluja.Server.Services.CategoryService
     public class CategoryService : ICategoryService
     {
         private readonly DataContext _context;
+
         public CategoryService(DataContext context)
         {
             _context = context;
